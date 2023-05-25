@@ -1,0 +1,234 @@
+﻿
+@model Eskool.ViewModels.OTPViewModel
+@{
+    ViewBag.Title = ViewBag.SuccessMessage;
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2><i class="fa fa-key"></i>HPL Head Office Internet OTP Generator </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+
+                </ul>
+
+                <div class="clearfix"></div>
+
+            </div>
+            <div class="x_content">
+
+
+
+
+                @using (Html.BeginForm("OTP", "Account", FormMethod.Post, new { id = "demo_form2", enctype = "multipart/form-data", @class = "form-horizontal form-label-left" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-horizontal">
+
+                        <div class="col-md-14">
+
+                            <div class="x_panel child">
+
+
+                                <div class="x_title">
+                                    <h2><i class="fa fa-info-circle"></i> Basic Information</h2>
+                                    <ul class="nav navbar-right panel_toolbox">
+
+                                        <li>
+                                            <a class="collapse-link panel"><i class="fa fa-chevron-up"></i></a>
+                                        </li>
+                                    </ul>
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="x_content">
+
+                                    <div class="col-md-14 employeeinfo-left">
+                                        <div class="table-responsive">
+                                            <div>
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="0" id="dvEmployeeCode">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Host Name:</th>
+
+                                                            <td>
+                                                                @Html.TextBoxFor(model => model.EmployeeCode, new { @class = "form-control", required = "required" })
+
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="0" id="dvGuestName">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Guest Name:</th>
+
+                                                            <td>
+                                                                @Html.TextBoxFor(model => model.GuestName, new { @class = "form-control", required = "required" })
+
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="1" id="dvCompanyName">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Guest Company Name:</th>
+
+                                                            <td>
+                                                                @Html.TextBoxFor(model => model.CompanyName, new { @class = "form-control", required = "required" })
+
+                                                            </td>
+
+
+                                                    </tbody>
+                                                </table>
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="1" id="dvAddress">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Guest Mobile No:</th>
+
+                                                            <td>
+                                                                @Html.TextBoxFor(model => model.GuestMobileNo, new { @class = "form-control", required = "required", id = "GuestMobileNo", oninput = "validateMobileNo()" })
+                                                                <span id="mobileNoError" style="color:red;"></span>
+                                                            </td>
+
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="1" id="dvAddress">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Address:</th>
+
+                                                            <td>
+                                                                @Html.TextBoxFor(model => model.Address, new { @class = "form-control", required = "required" })
+
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="1" id="dvDuration">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Duration :</th>
+
+                                                            <td>
+                                                                @Html.DropDownListFor(m => m.Duration, new SelectList(new[]
+                                                                {
+                                                                    new { Value = 8, Text = "8 Hours" },
+                                                                    new { Value = 72, Text = "72 Hours" }
+                                                                }, "Value", "Text", ViewBag.SelectedDuration), "Select duration", new { @class = "form-control", required = "required" })
+
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                                <table class="table table-bordered  table-hover" cellspacing="0" rules="all" border="1" id="dvAddress">
+                                                    <tbody>
+                                                        <tr>
+                                                            <th style="width:30%;">Remarks:</th>
+
+                                                            <td>
+                                                                @Html.TextBoxFor(model => model.Remarks, new { @class = "form-control", required = "required" })
+
+                                                            </td>
+                                                        </tr>
+
+
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-12-sm-12">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <input type="submit" style="min-width: 160px;" value="Get Information" class="btn btn-primary" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <a ID="LoginStatus" Style="width: 100%;" href="@Url.Action("Logout","Account")" Class="btn btn-danger btn-flat">Logout</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                }
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Success Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="successModalLabel">User Name & Password</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h1 class="text-success">@TempData["SuccessMessage"]</h1>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+
+
+    .x_content {
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        if ('@TempData["SuccessMessage"]' !== '') {
+            $('#successModal').modal('show');
+        }
+      
+    });
+
+    function validateMobileNo() {
+        var mobileNo = document.getElementById("GuestMobileNo").value;
+        if (mobileNo.length > 11 || isNaN(mobileNo)) {
+            alert("Invalid phone number! Please enter a valid 11-digit phone number.");
+            document.getElementById("GuestMobileNo").disabled = true;
+        }
+    }
+</script>

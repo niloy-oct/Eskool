@@ -1,0 +1,306 @@
+﻿@{
+    ViewBag.Title = "StockInfoDptWise";
+    Layout = "~/Views/Shared/_SiteLayout.cshtml";
+}
+
+<div class="page-title">
+    <div class="title_left" style="width: 100%">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+
+
+</div>
+<br />
+<div class="clearfix"></div>
+
+<div class="row">
+    <div class="col-md-12 col-sm-12 ">
+        <div class="x_panel" style="min-height: 400px;">
+            <div class="x_title">
+                <h2><i class="fa fa-search"></i>&nbsp;@ViewBag.param@*Prescription Survey Details*@</h2>
+                <ul class="nav navbar-right panel_toolbox">
+
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+
+                <form id="demo_form2" class="form-horizontal form-label-left">
+
+                    <div class="row">
+
+
+                        <div class="col-sm">
+
+                            <label>Date From </label>
+                            <div class="form-group">
+
+                                <input ID="dateFrom" ClientIDMode="Static" runat="server" placeholder="dd/MM/yyyy" Class="form-control datepicker" />
+                                <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+                            </div>
+                        </div>
+
+                        <div class="col-sm">
+                            <label>Date To </label>
+                            <div class="form-group">
+
+                                <input ID="dateTo" ClientIDMode="Static" runat="server" placeholder="dd/MM/yyyy" Class="form-control datepicker" />
+                                <span class="fa fa-calendar-o form-control-feedback right" aria-hidden="true"></span>
+
+                            </div>
+                        </div>
+
+
+                        <div class="col-sm">
+
+                            <asp:Label runat="server"> Report Type </asp:Label>
+                            <div class="form-group">
+                                <select class="selectlist form-control select2-hidden-accessible" onchange="OnchangeBusiness();" id="ddlReportType" data-val="true" tabindex="-1" aria-hidden="true">
+                                    <option value="Y">Quantity Wise</option>
+                                    <option value="N">Amount Wise</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm">
+
+                            <label>Products</label>
+
+                            <div class="form-group">
+
+                                <select class="form-control  select2-hidden-accessible" multiple="multiple" onchange="OnchangeProduct();" id="ddlProduct"></select>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm">
+
+                            <button type="button" onclick="SearchReport();" style="margin-top: 20px; width: 100px;" class="btn btn-info"><i class="fa fa-search"></i>Search</button>
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="clearfix"></div>
+
+                    <hr />
+                    <div class="row col-md-12">
+
+                        <div id="someDiv"></div>
+                        <div class="table-responsive">
+                            <table id="ReportData" style="width:100%" class="table table-striped table-hover table-bordered">
+
+                                <thead>
+                                    <tr>
+                                        <th>Product Code</th>
+                                        <th>Product Name</th>
+                                        <th>Pack Size</th>
+                                        <th>Opening Quantity</th>
+                                        <th>CENTRAL </th>
+                                        <th>BARISAL  </th>
+                                        <th>BOGRA  </th>
+                                        <th>CHITTAGONG  </th>
+                                        <th>COMILLA  </th>
+                                        <th>DHAKA   </th>
+                                        <th>FARIDPUR  </th>
+                                        <th>JESSORE  </th>
+                                        <th>KHULNA  </th>
+                                        <th>MYMENSINGH  </th>
+                                        <th>RAJSHAHI  </th>
+                                        <th>RANGPUR  </th>
+                                        <th>SYLHET  </th>
+                                        <th>MAIZDEE  </th>
+                                        <th>NARAYANGANJ  </th>
+                                        <th>UTTARA  </th>
+                                        <th>MOULVIBAZAR  </th>
+                                        <th>TANGAIL  </th>
+                                        <th>COXS BAZAR  </th>
+                                        <th>KUSHTIA  </th>
+                                        <th>DINAJPUR  </th>
+                                        <th>BHAIRAB  </th>
+                                        <th>FENI  </th>
+                                        <th>SHYAMOLI  </th>
+                                        <th>CHANDPUR  </th>
+                                        <th>PATUAKHALI  </th>
+                                        <th>PABNA  </th>
+                                        <th>BHOLA  </th>
+                                        <th>GAZIPUR  </th>
+                                        <th>SAVAR  </th>
+                                        <th>Closing Quantity  </th>
+
+                                    </tr>
+                                </thead>
+
+
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+
+
+    <script type="text/javascript">
+
+        jQuery(document).ready(function ($) {
+
+
+            GetProductList();
+          /*  OnchangeProduct();*/
+        });
+
+       function OnchangeProduct() {
+
+       }
+        function GetProductList() {
+            $.ajax({
+                type: "GET",
+                async: true,
+                url: '@Url.Action("GetProduct", "Reports")',
+                success: function (item) {
+                    $('#ddlProduct').select2({
+                        placeholder: 'Select an option',
+                        width: '100%', theme: "classic",
+                        data: item,
+                        multiple: "multiple"
+                    });
+                },
+                error: function (xhr) {
+                    //debugger;
+                    console.log(xhr.responseText);
+                    alert("Error has occurred..");
+                }
+            });
+        }
+       function SearchReport() {
+           LoadDataTable();
+       }
+      function LoadDataTable() {
+          var Product = $("#ddlProduct").select2("val");
+          if (Product && Product.length > 0) {
+              Product = Product.join();
+          }
+          else { Product = ""; }
+          table = $('#ReportData').DataTable().destroy();
+          table = $('#ReportData').DataTable(
+            {
+                  "processing": true,
+                  "scrollY": '60vh',
+                  "scrollX": 'auto',
+                  "dom": 'Bfrtip',
+                  "buttons": [
+                      {
+                          extend: 'excelHtml5',
+                          header: true,
+                          text: 'Export Excel',
+                          filename: "StockInfoDepotWise.xlsx",
+                          title: ""
+                      }
+                  ],
+                  "searching": false,
+                  "ordering": false,
+                  "serverSide": true,
+                  "bInfo": true,
+                  "draw": false,
+
+                  "resizing": false,
+                  "pageLength": 50,
+                  "scroller": {
+                      loadingIndicator: true
+                   },
+                  "ajax":
+                  {
+                      "url": '@Url.Action("StockInfoDptWiseAjaxCall", "Reports")',
+                      "contentType": "application/json",
+                      "type": "GET",
+                      "dataType": "JSON",
+                      "data": function (d) {
+                          d.columns = null;
+                          d.dateFrom = $("#dateFrom").val();
+                          d.dateTo = $("#dateTo").val();
+                          d.Product = Product;
+
+                          d.reportType = $("#ddlReportType").val();
+
+                          return d;
+                      },
+                      "dataSrc": function (json) {
+                          debugger;
+                          json.draw = json.draw;
+                          json.recordsTotal = json.recordsTotal;
+                          json.recordsFiltered = json.recordsFiltered;
+                          json.data = json.data;
+                          var return_data = json;
+                          return return_data.data;
+                      }
+                  }
+                  ,
+                  //"createdRow": function (row, data, dataIndex) {
+                  //    debugger;
+                  //    $(row).data('itemData', data);
+                  //},
+                "columns": [
+
+
+                    { "data": "ProductCode" },
+                    { "data": "PNm" },
+                    { "data": "PacSiz" },
+                    { "data": "OpeningQty" },
+                    {"data": "CENTRAL" },
+                    { "data": "BARISAL"},
+                    { "data": "BOGRA" },
+                    { "data": "CHITTAGONG" },
+                    { "data": "COMILLA" },
+                    { "data": "DHAKA" },
+                    { "data": "FARIDPUR" },
+                    { "data": "JESSORE" },
+                    { "data": "KHULNA" },
+                    { "data": "MYMENSINGH" },
+                    { "data": "RAJSHAHI" },
+                    { "data": "RANGPUR" },
+                    { "data": "SYLHET" },
+                    { "data": "MAIZDEE" },
+                    { "data": "NARAYANGANJ" },
+                    { "data": "UTTARA" },
+                    { "data": "MOULVIBAZAR" },
+                    { "data": "TANGAIL" },
+                    { "data": "COXSBAZAR" },
+                    { "data": "KUSHTIA" },
+                    { "data": "DINAJPUR" },
+                    { "data": "BHAIRAB" },
+                    { "data": "FENI" },
+                    { "data": "SHYAMOLI" },
+                    { "data": "CHANDPUR" },
+                    { "data": "PATUAKHALI" },
+                    { "data": "PABNA" },
+                    { "data": "BHOLA" },
+                    { "data": "GAZIPUR" },
+                    { "data": "SAVAR" },
+                    { "data": "ClosingQty" },
+
+
+                ]
+            });
+        }
+
+    </script>
+}
+
+

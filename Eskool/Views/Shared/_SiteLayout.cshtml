@@ -1,0 +1,483 @@
+﻿@using System.Threading.Tasks;
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Guest Internet Access</title>
+
+    <link href="@Url.Content("~/images/icon.png")" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/vendors/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="@Url.Content("~/vendors/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+
+    <!-- NProgress -->
+    <link href="@Url.Content("~/vendors/nprogress/nprogress.css")" rel="stylesheet">
+    <!-- iCheck -->
+    <link href="@Url.Content("~/vendors/iCheck/skins/flat/green.css")" rel="stylesheet">
+
+    <!-- bootstrap-progressbar -->
+    <link href="@Url.Content("~/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css")" rel="stylesheet">
+    <!-- JQVMap -->
+    <link href="@Url.Content("~/vendors/jqvmap/dist/jqvmap.min.css")" rel="stylesheet" />
+    <!-- bootstrap-daterangepicker -->
+    <link href="@Url.Content("~/vendors/bootstrap-daterangepicker/daterangepicker.css")" rel="stylesheet">
+
+    <link href="@Url.Content("~/vendors/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css")" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="@Url.Content("~/build/css/custom.min.css")" rel="stylesheet">
+
+    <link href="@Url.Content("~/Custom/CSS/select2.min.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Custom/CSS/custom.css")" rel="stylesheet" />
+    <link href="@Url.Content("~/Custom/CSS/comboTree.css")" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.materialdesignicons.com/5.0.45/css/materialdesignicons.min.css">
+
+</head>
+<body class="nav-md">
+
+    <div class="container body">
+        <div class="main_container">
+            <div class="col-md-3 left_col">
+                <div class="left_col scroll-view">
+
+
+                    <div class="clearfix"></div>
+
+
+                    <!-- /menu profile quick info -->
+
+                    <br />
+
+                    <!-- sidebar menu -->
+                    @*<div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+
+                            <div class="menu_section">
+
+                                <ul class="nav side-menu">
+
+                                    @Html.Action("Menue", "Master")
+
+                                </ul>
+                            </div>
+
+                        </div>*@
+                   
+
+                </div>
+            </div>
+
+            <!-- top navigation -->
+            <div class="top_nav">
+                <div class="nav_menu">
+                    <div class="nav toggle">
+                        <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                       
+
+                    </div>
+                    <nav class="nav navbar-nav">
+                        <ul class=" navbar-right">
+                           
+                           
+                            <li role="presentation" style="display:none" class="nav-item dropdown open">
+                                <a href="javascript:;" class="dropdown-toggle info-number" id="navbarDropdown1" data-toggle="dropdown" aria-expanded="false">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="badge bg-green">6</span>
+                                </a>
+                                <ul class="dropdown-menu list-unstyled msg_list" role="menu" aria-labelledby="navbarDropdown1">
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image">
+                                                <img src="@Url.Content("~/images/img.jpg")" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image">
+                                                <img src="/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image">
+                                                <img src="/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="dropdown-item">
+                                            <span class="image">
+                                                <img src="/images/img.jpg" alt="Profile Image" />
+                                            </span>
+                                            <span>
+                                                <span>John Smith</span>
+                                                <span class="time">3 mins ago</span>
+                                            </span>
+                                            <span class="message">
+                                                Film festivals used to be do-or-die moments for movie makers. They were where.
+                                            </span>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <div class="text-center">
+                                            <a class="dropdown-item">
+                                                <strong>See All Alerts</strong>
+                                                <i class="fa fa-angle-right"></i>
+                                            </a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <!-- top tiles -->
+                <!-- Main content -->
+                <div class="content">
+
+                    <div class="page-title" style="height:auto">
+                        <div class="title_left" style="width: 100%">
+                            <div class="alert alert-danger alert-dismissible" style="display:none;" id="divErrorArea" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <label ClientIDMode="Static" ID="lblError"><b>@ViewBag.ErrorMessage</b></label>
+                            </div>
+
+                            <div class="alert alert-success alert-dismissible" id="divSuccessArea" style="display:none;" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">×</span>
+                                </button>
+                                <label runat="server" ClientIDMode="Static" ID="lblSuccessMessage"><b>@ViewBag.SuccessMessage</b></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container">
+
+                        @RenderBody()
+
+
+
+
+                    </div>
+
+
+                    <!-- /.container-fluid -->
+                </div>
+
+                <footer>
+                    <div class="divFooter">
+                        <b>HPL Guest Internet Access System</b> ~ R&amp;D By  <strong> <b>MIS, HPL</b> ~ </strong> Copyright ©   @DateTime.Now.Year
+                    </div>
+
+
+                    <div class="clearfix"></div>
+                </footer>
+
+
+
+                <!-- /.content -->
+            </div>
+            <!-- /page content -->
+            <!-- footer content -->
+            <!-- /footer content -->
+        </div>
+    </div>
+
+    <div class="loader"></div>
+
+
+    <!-- jQuery -->
+    <script src="@Url.Content("~/vendors/jquery/dist/jquery.min.js")"></script>
+    <!-- Bootstrap -->
+    <script src="@Url.Content("~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
+    <!-- FastClick -->
+    <script src="@Url.Content("~/vendors/fastclick/lib/fastclick.js")"></script>
+    <!-- NProgress -->
+    <script src="@Url.Content("~/vendors/nprogress/nprogress.js")"></script>
+    <!-- Chart.js -->
+    <script src="@Url.Content("~/vendors/Chart.js/dist/Chart.min.js")"></script>
+    <!-- gauge.js -->
+    <script src="@Url.Content("~/vendors/gauge.js/dist/gauge.min.js")"></script>
+    <!-- bootstrap-progressbar -
+    <script src="@Url.Content("~/vendors/bootstrap-progressbar/bootstrap-progressbar.min.js")"></script>
+    <!-- iCheck -->
+    <script src="@Url.Content("~/vendors/iCheck/icheck.min.js")"></script>
+    <!-- Skycons -->
+    <script src="@Url.Content("~/vendors/skycons/skycons.js")"></script>
+    <!-- Flot -->
+    <script src="@Url.Content("~/vendors/Flot/jquery.flot.js")"></script>
+    <script src="@Url.Content("~/vendors/Flot/jquery.flot.pie.js")"></script>
+    <script src="@Url.Content("~/vendors/Flot/jquery.flot.time.js")"></script>
+    <script src="@Url.Content("~/vendors/Flot/jquery.flot.stack.js")"></script>
+    <script src="@Url.Content("~/vendors/Flot/jquery.flot.resize.js")"></script>
+    <!-- Flot plugins -->
+    <script src="@Url.Content("~/vendors/flot.orderbars/js/jquery.flot.orderBars.js")"></script>
+    <script src="@Url.Content("~/vendors/flot-spline/js/jquery.flot.spline.min.js")"></script>
+    <script src="@Url.Content("~/vendors/flot.curvedlines/curvedLines.js")"></script>
+    <!-- DateJS -->
+    <script src="@Url.Content("~/vendors/DateJS/build/date.js")"></script>
+    <!-- JQVMap -->
+    <script src="@Url.Content("~/vendors/jqvmap/dist/jquery.vmap.js")"></script>
+    <script src="@Url.Content("~/vendors/jqvmap/dist/maps/jquery.vmap.world.js")"></script>
+    <script src="@Url.Content("~/vendors/jqvmap/examples/js/jquery.vmap.sampledata.js")"></script>
+    <!-- bootstrap-daterangepick -->
+    <script src="@Url.Content("~/vendors/moment/min/moment.min.js")"></script>
+    <script src="@Url.Content("~/vendors/bootstrap-daterangepicker/daterangepicker.js")"></script>
+    <script src="@Url.Content("~/vendors/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js")"></script>
+    <script src="@Url.Content("~/Custom/JS/select2.full.min.js")"></script>
+
+    <!-- Custom Theme Scripts -->
+    @*<script src="@Url.Content("~/build/js/custom.js")"></script>*@
+    <script src="@Url.Content("~/build/js/custom.min.js")"></script>
+
+
+    <script src="@Url.Content("~/Custom/JS/comboTreePlugin.js")"></script>
+
+    <script src="@Url.Content("~/vendors/datatables.net/js/jquery.dataTables.min.js")"></script>
+
+
+
+
+    <script>
+        $('li ul li a').each(function (index, element) {
+
+
+            var test = String(window.location);
+            var test2 = $(this)[0].href;
+            if ($(this)[0].href == String(window.location)) {
+
+
+                $(this).parent().addClass('active');
+                $(this).parent().parent().show();
+                $(this).parent().parent().closest("li").addClass('active open');
+                $(this).parent().parent().closest("li").find("span.arrow").toggleClass("fa-chevron-up fa-chevron-down");
+
+            }
+        });
+
+
+        $(document).ready(function () {
+
+            ShowMessage();
+            @*ImageChaching('Marc_'+'@Sessions.Name.UserId');*@
+
+            $(":input").on("keyup change", function (e) {
+                // do stuff!
+            })
+
+            $("span.form-control-feedback").click(function () {
+
+
+                $(this).closest('div.form-group').find('input.datepicker').focus();
+            })
+
+            $('.selectlist').select2({ width: '100%', theme: "classic" });
+
+            $('.datepicker').daterangepicker({
+                singleDatePicker: true,
+                singleClasses: "picker_1",
+                "locale": {
+                    "format": "DD/MM/YYYY"
+                }
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+
+            $('.YearMonthPicker').datetimepicker({
+
+                defaultDate: new Date(),
+                format: "MMM-YYYY",
+                viewMode: "months"
+
+
+            }, function (start, end, label) {
+                console.log(start.toISOString(), end.toISOString(), label);
+            });
+            $('#menu_toggle').trigger('click');
+
+
+
+
+        });
+
+
+        function ImageChaching(id) {
+
+
+            var storageFiles = JSON.parse(localStorage.getItem(id)) || {},
+                img = document.getElementById("profileImg"),
+                img2 = document.getElementById("profileImg2"),
+                storageFilesDate = storageFiles.date,
+                date = new Date(),
+                todaysDate = (date.getMonth() + 1).toString() + date.getDate().toString();
+
+            // Compare date and create localStorage if it's not existing/too old
+            if (typeof storageFilesDate === "undefined" || storageFilesDate < todaysDate) {
+                // Take action when the image has loaded
+                img.addEventListener("load", function () {
+
+                    var imgCanvas = document.createElement("canvas"),
+                        imgContext = imgCanvas.getContext("2d");
+
+                    // Make sure canvas is as big as the picture
+                    imgCanvas.width = 240;
+                    imgCanvas.height = 250;
+
+                    // Draw image into canvas element
+                    imgContext.drawImage(img, 0, 0, 240, 250);
+
+                    // Save image as a data URL
+                    storageFiles.img = imgCanvas.toDataURL("image/png");
+
+                    // Set date for localStorage
+                    storageFiles.date = todaysDate;
+
+                    // Save as JSON in localStorage
+                    try {
+                        localStorage.clear(id);
+                        localStorage.setItem(id, JSON.stringify(storageFiles));
+                    }
+                    catch (e) {
+                        console.log("Storage failed: " + e);
+                    }
+                }, false);
+
+
+                   if(img != null)
+                    {
+
+
+
+                    img.setAttribute("src", "@Url.Action("GetImage", "Account")");
+
+                    img2.setAttribute("src", "@Url.Action("GetImage", "Account")");
+
+
+
+                   }
+
+                @*if (img != null) {
+
+                    $.ajax({
+                        type: "GET",
+                        async: false,
+                        url: '@Url.Action("GetImage", "Account")',
+                        contentType: "application/json;",
+
+                        success: function (data) {
+                            debugger;
+                            img.setAttribute("src", data);
+                            img2.setAttribute("src", data);
+                        },
+                        error: function (xhr, status, error) {
+
+                            img.setAttribute("src", "@Url.Content("~/images/user.png")");
+                            img2.setAttribute("src", "@Url.Content("~/images/user.png")");
+                        }
+                    });
+                }*@
+
+
+            }
+            else {
+                // Use image from localStorage
+                console.log("Image Fetched From Local Storage");
+
+                if (img != null) img.setAttribute("src", storageFiles.img);
+                if (img2 != null) img2.setAttribute("src", storageFiles.img);
+
+
+            }
+        }
+
+
+        function ShowMessage() {
+
+            var errorMsg = $("#lblError").text();
+            if (errorMsg && errorMsg != null && errorMsg != "") {
+
+                $("#divErrorArea").fadeIn();
+                $("#divErrorArea").fadeIn("slow");
+                $("#divErrorArea").fadeOut(10000);
+
+            }
+
+            var successMsg = $("#lblSuccessMessage").text();
+            if (successMsg && successMsg != null && successMsg != "") {
+
+                $("#divSuccessArea").fadeIn();
+                $("#divSuccessArea").fadeIn("slow");
+                $("#divSuccessArea").fadeOut(10000);
+
+            }
+
+        }
+
+        function ShowErrorMessage(msg) {
+
+            $("#lblError").text('');
+            $("#lblError").text(msg);
+            $("#divErrorArea").fadeIn();
+            $("#divErrorArea").fadeIn("slow");
+            $("#divErrorArea").fadeOut(10000);
+        }
+
+        function ShowSuccessMessage(msg) {
+
+            $("#lblSuccessMessage").text('');
+            $("#lblSuccessMessage").text(msg);
+            $("#divSuccessArea").fadeIn();
+            $("#divSuccessArea").fadeIn("slow");
+            $("#divSuccessArea").fadeOut(10000);
+        }
+
+
+
+        function imgError(image) {
+
+            image.onerror = "";
+            image.src = "/images/user.png";
+            return true;
+        }
+
+
+
+    </script>
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>

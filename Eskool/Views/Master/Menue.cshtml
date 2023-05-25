@@ -1,0 +1,37 @@
+﻿@using System.Data;
+@if (ViewBag.MenueList != null)
+{
+
+
+
+
+    foreach (Dictionary<string, object> item in ViewBag.MenueList)
+    {
+        <li>
+            <a class="collapse-link">
+                <i class='@item["Icon"].ToString()'></i><span>@item["menu_details"].ToString()</span><span class="fa fa-chevron-down arrow"></span>
+            </a>
+
+            <ul class="nav child_menu">
+
+                @foreach (Dictionary<string, object> itemS in ViewBag.SubMenueList)
+                {
+
+                    if (itemS["menu_id"].ToString() == item["menu_id"].ToString())
+                    {
+
+                        <li> <a  href='@Url.Content("~/"+@itemS["form_name"].ToString() + "?param=" + HttpUtility.UrlEncode(@itemS["display_name"].ToString()) )'> <i class='@itemS["Icon"].ToString()'></i><span>@itemS["display_name"].ToString()</span></a></li>
+                    }
+                }
+
+            </ul>
+
+
+        </li>
+
+
+
+    }
+
+
+}

@@ -1,0 +1,168 @@
+﻿
+@{
+    Layout = null;
+}
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Eskool</title>
+    <link href="@Url.Content("~/images/HDSLp.png")" rel="shortcut icon" type="image/x-icon" />
+
+    <!-- Bootstrap -->
+    <link href="@Url.Content("~/vendors/bootstrap/dist/css/bootstrap.min.css")" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="@Url.Content("~/vendors/font-awesome/css/font-awesome.min.css")" rel="stylesheet">
+    <!-- NProgress -->
+    <link href="@Url.Content("~/vendors/nprogress/nprogress.css")" rel="stylesheet">
+    <!-- Animate.css -->
+    <link href="@Url.Content("~/vendors/animate.css/animate.min.css")" rel="stylesheet">
+
+    <!-- Custom Theme Style -->
+    <link href="@Url.Content("~/build/css/custom.min.css")" rel="stylesheet">
+</head>
+
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+
+        <div class="login_wrapper">
+
+            <div class="animate form login_form animated flipInY">
+
+
+
+                <section class="login_content">
+                    <form method="post" asp-action="Login" id="formLogin">
+
+                        <div>
+                            <img width="120" height="120" style="border-radius: 50%;" src="@Url.Content("~/images/Eskool.jpg")" />
+                        </div>
+                        <h6><b>Healthcare Diagnostic Solutions Ltd</b></h6>
+                        <br />
+
+                        <div class="alert alert-danger alert-dismissible" id="divErrorArea" style="display:none" role="alert">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <span id="lblError">@ViewBag.Error</span>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="Username">
+                                User ID
+                            </label>
+                            <div class="col-md-8 col-sm-6 ">
+
+                                <input name="UserName" type="text" id="tbxUserName" class="form-control" placeholder="User ID" />
+
+                            </div>
+                        </div>
+
+                        <div class="item form-group">
+                            <label class="col-form-label col-md-3 col-sm-3 label-align" for="Password">
+                                Password
+                            </label>
+                            <div class="col-md-8 col-sm-6 ">
+
+                                <input name="Password" type="password" id="tbxPassword" class="form-control" placeholder="Password" />
+                            </div>
+                        </div>
+
+
+                        <div class="item form-group">
+
+                            <div class="col-md-6 col-sm-6 offset-md-3">
+
+                                <input type="submit" name="LoginButton" value="Login" onclick="return DoLogin();" id="LoginButton" class="btn btn-info float-left" style="min-width: 120px;margin-left: 0;" />
+
+                                <a class="reset_pass" href="#">Lost your password?</a>
+                            </div>
+
+                        </div>
+
+
+                        <div class="separator">
+
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+
+                                <p style="color: #6c757d; font-size: 14px; font-family: serif;">
+                                    <strong>Eskool </strong>| MIS, HPL   © 2023
+                                </p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+
+
+        </div>
+    </div>
+</body>
+</html>
+
+
+
+<!-- jQuery -->
+<script src="@Url.Content("~/vendors/jquery/dist/jquery.min.js")"></script>
+<!-- Bootstrap -->
+<script src="@Url.Content("~/vendors/bootstrap/dist/js/bootstrap.bundle.min.js")"></script>
+<!-- FastClick -->
+<script src="@Url.Content("~/vendors/fastclick/lib/fastclick.js")"></script>
+<!-- NProgress -->
+<script src="@Url.Content("~/vendors/nprogress/nprogress.js")"></script>
+<!-- validator -->
+<!-- <script src="../vendors/validator/validator.js"></script> -->
+<!-- Custom Theme Scripts -->
+<script src="@Url.Content("~/build/js/custom.min.js")"></script>
+
+
+<script>
+
+    $(document).ready(function () {
+
+        var errorMsg = $("#lblError").text();
+        if (errorMsg && errorMsg != null && errorMsg != "") {
+
+            $("#divErrorArea").fadeIn();
+            $("#divErrorArea").fadeIn("slow");
+            $("#divErrorArea").fadeOut(10000);
+
+        }
+
+
+
+    });
+
+    function DoLogin() {
+
+
+        var userName = $("#tbxUserName").val();
+        var Password = $("#tbxPassword").val();
+
+        if (userName == "" || Password == "") {
+
+            $("#lblError").text("Enter User ID & Password");
+
+            $("#divErrorArea").fadeIn();
+            $("#divErrorArea").fadeIn("slow");
+            $("#divErrorArea").fadeOut(10000);
+
+            return false;
+
+        }
+
+        return true;
+
+    }
+</script>
