@@ -53,11 +53,18 @@ namespace Eskool.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        public async Task<ActionResult> Login(LoginModel Login)
+        public async Task<ActionResult> Login(FormCollection formCollection)
         {
-            if (Login.UserName!=null && Login.Password!=null)
+
+            var UserName = formCollection["UserName"];
+            var Password = formCollection["Password"];
+
+            LoginModel login = new LoginModel();
+            login.UserName = UserName;
+            login.Password = Password;
+            if (login != null && !string.IsNullOrEmpty(login.UserName) && !string.IsNullOrEmpty(login.Password))
             {
-                LoginInfo dt = await context.Database.SqlQuery<LoginInfo>($"Get_login '{Login.UserName.Trim()}','{Login.Password.Trim()}'").FirstOrDefaultAsync();
+                LoginInfo dt = await context.Database.SqlQuery<LoginInfo>($"dbo.Get_MOB_User_Login_Details '{login.UserName.Trim()}','{login.Password.Trim()}'").FirstOrDefaultAsync();
                 //context.Set<LoginInfo>.s.GetLoginInfo(Login.UserName.Trim(), Login.Password.Trim());
 
 
@@ -69,13 +76,12 @@ namespace Eskool.Controllers
                         Sessions.Name = new SessionInfo();
                     }
 
-                    Sessions.Name.UserId = dt.LegacyID;
-                    Sessions.Name.UserName = dt.UserName;
-                    sessionusername = Sessions.Name.UserName;
+                    Sessions.Name.UserId = dt.UserName;
+                    Sessions.Name.UserName = dt.LegacyID;
                     Sessions.Name.DesignationCode = dt.DesignationCode;
                     Sessions.Name.UserSAPId = dt.UserName;
                     Sessions.Name.UserCellPhone = dt.CellPhone;
-                    return RedirectToAction("OTP", "Account");
+                    return RedirectToAction("Index", "Pending");
                 }
                 else
                 {
