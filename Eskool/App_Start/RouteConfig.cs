@@ -11,18 +11,15 @@ namespace Eskool
     {
         public static void RegisterRoutes(RouteCollection routes)
         {
-        //    routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+         
+            var namespaces = new[] { "Eskool.Controllers" };
 
-        //    routes.MapRoute(
-        //    name: "PrescriptionShareDetailsData_ForGrid",
-        //    url: "{Reports}/{PrescriptionShareDetailsData_ForGrid}/{draw}/{start}/{length}",
-        //    defaults: new { controller = "PrescriptionShareDetailsData_ForGrid", action = "Reports" }
-        //);
-
+            // Register the route with the namespaces
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Account", action = "OTP", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: namespaces
             );
         }
     }
